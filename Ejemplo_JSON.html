@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplo JSON + LocalStorage</title>
+</head>
+<body>
+  <h2>Ejemplo JSON con LocalStorage</h2>
+
+  <button onclick="guardarUsuario()">Guardar Usuario</button>
+  <button onclick="mostrarUsuario()">Mostrar Usuario</button>
+
+  <p id="resultado"></p>
+
+  <script>
+    function guardarUsuario() {
+      // 1. Crear objeto de usuario
+      let usuario = {
+        nombre: "Alice",
+        edad: 20,
+        correo: "alice@example.com"
+      };
+
+      // 2. Convertir el objeto a JSON (texto)
+      let usuarioJSON = JSON.stringify(usuario);
+
+      // 3. Guardar en LocalStorage
+      localStorage.setItem("usuario", usuarioJSON);
+
+      alert("✅ Usuario guardado en LocalStorage");
+    }
+
+    function mostrarUsuario() {
+      // 4. Recuperar el JSON desde LocalStorage
+      let usuarioJSON = localStorage.getItem("usuario");
+
+      if (usuarioJSON) {
+        // 5. Convertir JSON (texto) a objeto
+        let usuarioObjeto = JSON.parse(usuarioJSON);
+
+        // 6. Mostrar en pantalla
+        document.getElementById("resultado").innerText = 
+          `Nombre: ${usuarioObjeto.nombre}, Edad: ${usuarioObjeto.edad}, Correo: ${usuarioObjeto.correo}`;
+      } else {
+        document.getElementById("resultado").innerText = "No hay usuario guardado.";
+      }
+    }
+  </script>
+</body>
+</html>
